@@ -25,7 +25,7 @@ class CartPage(BasePage):
         remove_button_locator = (By.ID, f"{self.REMOVE_BUTTON_PREFIX}{item_id_suffix}")
         self._click(remove_button_locator)
     
-    def procees_to_checkout(self):
+    def proceed_to_checkout(self):
         self._click(self.CHECKOUT_BUTTON)
     
     def continue_shopping(self):
