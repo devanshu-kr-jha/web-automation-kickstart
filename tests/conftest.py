@@ -3,6 +3,7 @@ import os
 import sys
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service as ChromeService
+from selenium.webdriver.chrome.options import Options
 from dotenv import load_dotenv
 
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
@@ -18,7 +19,17 @@ load_dotenv()
 
 @pytest.fixture(scope="function")
 def driver():
-    driver = webdriver.Chrome()
+    chrome_options = Options()
+
+    prefs = {
+        "credentials_enable_service": False,
+        "profile.password_manager_enabled": False
+    }
+    chrome_options.add_experimental_option("prefs", prefs)
+
+    chrome_options.add_argument("--incognito")
+    
+    driver = webdriver.Chrome(options=chrome_options)
     driver.implicitly_wait(5)
     yield driver
     driver.quit()
