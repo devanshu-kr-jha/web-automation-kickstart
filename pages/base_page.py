@@ -71,5 +71,24 @@ class BasePage:
     
     def navigate_to(self, path: str = ""):
         self.driver.get(self.base_url + path)
+    
+    def _get_element_attribute(self, locator: tuple, attribute_name: str, timeout: int = 10) -> str:
+        """Gets an attribute value from a web element."""
+        element = self._find_element(locator, timeout)
+        return element.get_attribute(attribute_name)
+
+    def _select_dropdown_by_visible_text(self, locator: tuple, text: str, timeout: int = 10):
+        """Selects an option from a dropdown by its visible text."""
+        from selenium.webdriver.support.ui import Select # Local import to avoid circular dependency if Select is widely used
+        element = self._find_element(locator, timeout)
+        select = Select(element)
+        select.select_by_visible_text(text)
+
+    def _select_dropdown_by_value(self, locator: tuple, value: str, timeout: int = 10):
+        """Selects an option from a dropdown by its value attribute."""
+        from selenium.webdriver.support.ui import Select
+        element = self._find_element(locator, timeout)
+        select = Select(element)
+        select.select_by_value(value)
         
     
