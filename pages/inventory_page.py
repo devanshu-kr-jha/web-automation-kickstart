@@ -22,7 +22,7 @@ class InventoryPage(BasePage):
     def get_page_title_text(self) -> str:
         return self._get_text(self.PAGE_TITLE)
     
-    def is_on_inventory_page(self) -> bool:
+    def is_inventory_page_displayed(self) -> bool:
         return self._is_displayed(self.PAGE_TITLE) and self.get_page_title_text() == "Products"
     
     def get_item_count(self) -> int:
