@@ -3,7 +3,6 @@ from selenium.webdriver.remote.webelement import WebElement
 from pages.base_page import BasePage
 
 class InventoryPage(BasePage):
-    #Locators
     PAGE_TITLE = (By.CLASS_NAME, "title") # "Products"
     SHOPPING_CART_ICON = (By.ID, "shopping_cart_container")
     SHOPPING_CART_BADGE = (By.CLASS_NAME, "shopping_cart_badge")
@@ -29,8 +28,6 @@ class InventoryPage(BasePage):
         return len(self._find_elements(self.INVENTORY_ITEM))
     
     def add_item_to_cart_by_name(self, item_name: str):
-        # For simplicity, using a specific for one product for now
-
         item_id_suffix = item_name.lower().replace(" ", "-") # "Sauce Labs Backpack" -> "sauce-labs-backpack"
         add_to_cart_btn_locator = (By.ID, f"{self.ADD_TO_CART_BUTTON_PREFIX}{item_id_suffix}")
         self._click(add_to_cart_btn_locator)
